@@ -1,0 +1,29 @@
+extends ../../views/layout
+
+block content
+  .row
+    .col-md-9.col-md-offset-2
+      h1.highlight= title
+      p Register with one of these services
+      ul.social-list 
+        li 
+          i.fa.fa-twitter.fa-4x
+        li
+          i.fa.fa-github.fa-4x
+        li 
+          i.fa.fa-linkedin.fa-4x
+      .clearfix
+      p.form-intro Or simply create an account below.
+      form.form-signin(method="post" action="/users/register")
+        .form-group
+          label Username 
+          input.form-control(type="text" name="username")
+        .form-group
+          label Password
+          input.form-control(type="password" name="password")
+        .form-group
+          button.btn.btn-default Register
+      p
+        | Already have an account? Click
+        a(href='/login')  here
+        |  to login.

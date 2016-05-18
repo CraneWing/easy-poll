@@ -1,0 +1,24 @@
+extends ../../views/layout
+
+block content
+  .row
+    .col-md-9.col-md-offset-2
+      h1.highlight= title
+      div.errors
+        if errors
+          ul.alert.alert-danger
+            each error, i in errors
+              li #{error.msg}
+      form.form-signin(method="post" action="/users/login")
+        .form-group
+          label Username (use email)
+          input.form-control(type="text" name="username")
+        .form-group
+          label Password
+          input.form-control(type="password" name="password")
+        .form-group
+          button.btn.btn-default Login
+      p
+        | Would you like to create polls as well as vote in them? You must register for an account, which is fast, free and simple (and EasyPoll never shares or sells user data). Go 
+        a(href='/register')  here
+        |  to register.

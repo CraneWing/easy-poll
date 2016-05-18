@@ -1,0 +1,30 @@
+.navbar.navbar-static
+  .container
+    .navbar-header
+      button.navbar-toggle.collapse(type="button")
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/') EasyPoll 
+        span
+          i.fa.fa-pencil
+    ul.nav.navbar-right.navbar-nav
+      li
+        a(href='/polls') All Polls
+      if (!currentUser)
+        li
+          a(href='/users/login') Login
+        li
+          a(href='/users/register') Register
+      if (currentUser)
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown')
+            span= currentUser.username
+            i.fa.fa-user &nbsp;
+            i.fa.fa-chevron-down
+          ul.dropdown-menu
+            li
+              a(href='/polls/new') Add Poll
+            li
+              a(href='/users/logout') Logout

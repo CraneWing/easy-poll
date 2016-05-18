@@ -1,0 +1,38 @@
+extends ../../views/layout
+
+block content
+  .row
+    .col-md-12
+      h1.highlight #{poll.poll_title}
+      hr
+  .row
+    .col-md-6
+      h4 #{poll.question}
+      .col-sm-8
+        form(action='/polls/' + poll._id + '/addvote' method="post")
+          .form-group
+            select.form-control(name="choice")
+              each choice, i in choices
+                option(value="#{choice._id}") #{choice.choice_name}
+          .form-group
+            button.btn.btn-default Add Vote
+      .clearfix
+      p Added by 
+        strong #{poll.author} 
+        | on 
+        strong #{moment(poll.created_at).format('D MMMM YYYY, h:mm a')}
+      if (currentUser)
+        p 
+          a.btn.btn-success(href="/polls/" + poll._id + "/edit") Edit
+          &nbsp; 
+          a.btn.btn-danger(href="/polls/" + poll._id + "/delete") Delete
+    .col-md-6
+      h4 Current Results
+      p 
+        strong Total Votes: 
+        | #{poll.total_votes}
+      ul 
+        each choice, i in choices
+          li
+            strong #{choice.choice_name}: 
+            | #{choice.choice_count}

@@ -1,0 +1,36 @@
+{
+  "name": "easypoll",
+  "version": "1.0.0",
+  "url": "https://easy-poll-cranewing.c9users.io",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repo": {
+    "type": "github",
+    "url": "https://github.com/CraneWing/easy-poll"
+  },
+  "author": "Victoria Mielke",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.13.0",
+    "express-validator": "^2.20.4",
+    "jade": "^1.11.0",
+    "moment": "^2.13.0",
+    "mongoose": "^4.4.17",
+    "morgan": "~1.6.1",
+    "nodemon": "^1.9.2",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
+    "passport-linkedin": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "passport-twitter": "^1.0.4",
+    "pug": "^0.1.0"
+  }
+}

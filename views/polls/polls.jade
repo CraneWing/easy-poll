@@ -1,0 +1,17 @@
+extends ../../views/layout
+
+block content
+  .row
+    .col-md-9.col-md-offset-2
+      h1.highlight= title
+      ul.list-group
+      if (polls.length == 0)
+        p No polls yet. Be the first to add one!
+      else
+        ul
+          each poll, i in polls
+            li.list-group-item.poll
+              a(href='/polls/' + poll._id) #{poll.poll_title}
+      br
+      if (currentUser)
+        a.btn.btn-primary(a href="/polls/new") Add Poll
