@@ -4,11 +4,22 @@ block content
   .row
     .col-md-9.col-md-offset-2
       h1.highlight= title
-      div.errors
-        if errors
-          ul.alert.alert-danger
-            each error, i in errors
-              li #{error.msg}
+      p Login using one of these services.
+      ul.social-list 
+        li 
+          a(href='/auth/twitter')
+            i.fa.fa-twitter-square.fa-3x
+        li
+          a(href='/auth/github')
+            i.fa.fa-github-square.fa-3x
+        li
+          a(href='/auth/linkedin')
+            i.fa.fa-linkedin-square.fa-3x
+         li
+          a(href='/auth/linkedin')
+            i.fa.fa-google-plus-square.fa-3x
+      .clearfix
+      p Or use form below if you signed up directly through the site.
       form.form-signin(method="post" action="/users/login")
         .form-group
           label Username (use email)

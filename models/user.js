@@ -1,19 +1,11 @@
-// campground model module
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
-// schema for campgrounds. adds reference to associated
-// comments for particular campground
 var userSchema = new mongoose.Schema({
-	name: {
-  	type: String
-  },
-  username: {
-  	type: String
-  },
-  password: {
-  	type: String
-  },
+	name: String,
+  username: String,
+  password: String,
+  someID: String,
   created_at: {
   	type: Date,
   	default: Date.now()

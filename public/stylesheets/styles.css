@@ -96,12 +96,16 @@ body {
 
 /* social net register list */
 .social-list {
+  float: left;
   list-style: none;
 }
 
 .social-list li {
-  float: left;
   display: inline-block;
   color: #ff3333;
   padding: 0 15px;
+}
+
+.social-list li a:hover {
+  color: #333;
 }

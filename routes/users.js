@@ -1,8 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var passportLinkedIn = require('../auth/linkedin');
+var passportGitHub = require('../auth/github');
+var passportTwitter = require('../auth/twitter');
 var User = require('../models/user');
 
+// ======= GET routes ========
 // login route
 router.get('/login', function(req, res, next) {
   res.render('users/login', {
@@ -12,7 +16,7 @@ router.get('/login', function(req, res, next) {
   });
 });
 
-// login route
+// register route for non-social accounts
 router.get('/register', function(req, res, next) {
   res.render('users/register', {
     title: 'Register',
@@ -20,6 +24,51 @@ router.get('/register', function(req, res, next) {
   });
 });
 
+// register through LinkedIn
+router.get('/auth/linkedin', passportLinkedIn.authenticate('linkedin'));
+
+router.get('/auth/linkedin/callback',
+  passportLinkedIn.authenticate('linkedin', {
+    failureRedirect: '/login'
+  }), function(req, res) {
+    res.json(req.user);
+  });
+
+// register through GitHub
+router.get('/auth/github', passportGitHub.authenticate('github',
+  { scope: '[user:email]' }));
+
+router.get('/auth/github/callback',
+  passportGitHub.authenticate('github', {
+    successRedirect: '/polls',
+    failureRedirect: '/login'
+  }), function(req, res) {
+    res.json(req.user);
+  });
+  
+// register through Twitter
+router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
+
+router.get('/auth/twitter/callback',
+  passportTwitter.authenticate('twitter', {
+    successRedirect: '/twitter',
+    failureRedirect: '/login'
+  }), function(req, res) {
+    res.json(req.user);
+  });
+  
+// register through Google Plus
+router.get('/auth/googleplus', passportTwitter.authenticate('googleplus'));
+
+router.get('/auth/goggleplus/callback',
+  passportTwitter.authenticate('googleplus', {
+    successRedirect: '/google',
+    failureRedirect: '/login'
+  }), function(req, res) {
+    res.json(req.user);
+  });
+  
+  
 // log user out
 router.get('/logout', function(req, res) {
   req.logout();

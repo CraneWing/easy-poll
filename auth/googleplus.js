@@ -1,0 +1,40 @@
+var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth').Strategy;
+
+var User = require('../models/user');
+var config = require('../_config');
+var init = require('./init');
+
+passport.use(new GoogleStrategy({
+    clientKey: config.googleplus.consumerKey,
+    clientSecret: config.googleplus.consumerSecret,
+    callbackURL: config.googleplus.callbackURL
+  }, // get user info from their LinkedIn account
+  function(accessToken, refreshToken, profile, done) {
+    var searchQuery = {
+        name: profile.displayName
+      };
+  
+      var updates = {
+        name: profile.displayName,
+        someID: profile.id
+      };
+  
+      var options = {
+        upsert: true
+      };
+  
+      // update the user if s/he exists or add a new user
+      User.findOrCreate(searchQuery, updates, options, function(err, user) {
+        if(err) {
+          return done(err);
+        } else {
+          return done(null, user);
+        }
+      });
+  }
+));
+
+init();
+
+module.exports = passport;
