@@ -6,7 +6,12 @@ block content
       h1.highlight= title
       ul.list-group
       if (polls.length == 0)
-        p No polls yet. Be the first to add one!
+        p
+          | No polls yet. Be the first to add one! You must 
+          a(href='/users/login') login
+          |  or 
+          a(href='/users/register') register
+          |  before adding polls.
       else
         ul
           each poll, i in polls

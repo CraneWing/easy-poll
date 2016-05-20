@@ -6,7 +6,10 @@ block content
       h1.highlight= title
       form.form-signin(method="post" action="/users/register")
         .form-group
-          label Username 
+          label Name
+          input.form-control(type="text" name="name")
+        .form-group
+          label Username (use your email)
           input.form-control(type="text" name="username")
         .form-group
           label Password
@@ -14,6 +17,6 @@ block content
         .form-group
           button.btn.btn-default Register
       p
-        | Already have an account? Click
-        a(href='/login')  here
-        |  to login.
+        | Click
+        a(href='users/login')  here
+        |  to login if you already registered, or want to login with Twitter.

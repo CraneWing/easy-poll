@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var passport = require('passport');
+var pollMiddleware = require('../middleware/poll.middleware');
+var userMiddleware = require('../middleware/user.middleware');
 var Poll = require('../models/poll.js');
 var Choice = require('../models/choice.js');
 
@@ -20,7 +22,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/new', function(req, res, next) {
+router.get('/new', userMiddleware.isLoggedIn, function(req, res, next) {
   var errors = false;
 
   res.render('polls/polls_new', {
@@ -50,7 +52,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 // edit poll view
-router.get('/:id/edit', function(req, res, next) {
+router.get('/:id/edit', pollMiddleware.checkPollOwnership, function(req, res, next) {
   var pollId = req.params.id;
 
   Poll.findById({ _id: pollId}, function(error, poll) {
@@ -79,11 +81,11 @@ router.get('/:id/delete', function(req, res, next) {
     res.render('polls/polls_delete', {
       title: 'Delete Poll',
       poll: poll
-    })
+    });
   });
 });
 // POST routes
-router.post('/new', function(req, res, next) {
+router.post('/new', userMiddleware.isLoggedIn, function(req, res, next) {
   req.checkBody('poll_title', 'Title is required').notEmpty();
   req.checkBody('question', 'Question is required').notEmpty();
   req.checkBody('choices', 'Choices are required').notEmpty();
@@ -104,7 +106,10 @@ router.post('/new', function(req, res, next) {
     var pollId = poll._id;
     poll.poll_title = poll_title;
     poll.question = question;
-    poll.author = currentUser.username;
+    poll.author = {
+      id: req.user._id,
+      username: req.user.local.displayName || req.user.twitter.displayName
+    };
 
 		Poll.create(poll, function(error, poll) {
 			if (error) res.send(error);
@@ -128,7 +133,7 @@ router.post('/new', function(req, res, next) {
 	  
     req.flash('success', 'Your poll was successfully added');
     res.redirect('/polls');
-	}
+   	}
 });
 
 // update choice count on a poll
@@ -166,7 +171,7 @@ router.post('/:id/addvote', function(req, res, next) {
 
       var updatedPoll = {
         total_votes: poll.total_votes
-      }
+      };
 
       Poll.findByIdAndUpdate({_id: pollId}, updatedPoll, {}, function(error, updatedPoll) {
         if (error) res.send(error);
@@ -179,7 +184,7 @@ router.post('/:id/addvote', function(req, res, next) {
 });
 
 // update poll and related choices
-router.post('/:id/edit', function(req, res, next) {
+router.post('/:id/edit', pollMiddleware.checkPollOwnership, function(req, res, next) {
   var pollId = req.params.id;
   var fields = req.body;
   console.log(fields);

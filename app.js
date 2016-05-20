@@ -12,7 +12,6 @@ var User = require('./models/user');
 
 // for passport
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 
 // routes
 var routes = require('./routes/index');
@@ -30,25 +29,22 @@ app.set('view engine', 'jade');
 app.use(flash());
 
 app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-// express-session - needed for passport and flash messages
+// express-session - for passport and flash messages
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'double secret',
-  resave: false,
-  saveUninitialized: false
+  secret: 'double secret',
+  resave: true,
+  saveUninitialized: true
 }));
 
 // tell app to use Passport 
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 // date and time formatting module
 app.locals.moment = require('moment');
 

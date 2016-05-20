@@ -1,20 +1,29 @@
 var mongoose = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
+var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new mongoose.Schema({
-	name: String,
-  username: String,
-  password: String,
-  someID: String,
-  created_at: {
-  	type: Date,
-  	default: Date.now()
+  local: {
+    displayName: String,
+    username: String,
+    password: String
+  },
+  twitter: {
+    id: String,
+    displayName: String,
+    username: String,
+    token: String
   }
 });
 
-// connect model to Passport Local Mongoose module. adds
-// built-in data related to session decoding and encoding.
-userSchema.plugin(passportLocalMongoose);
+// password hasher
+userSchema.methods.generateHash = function generateHash(password) {
+	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// compare passwords in local login
+userSchema.methods.validPassword = function validPassword(password) {
+	return bcrypt.compareSync(password, this.local.password);
+};
 
 // create user model
 module.exports = mongoose.model('User', userSchema);

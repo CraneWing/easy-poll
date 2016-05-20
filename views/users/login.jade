@@ -4,20 +4,11 @@ block content
   .row
     .col-md-9.col-md-offset-2
       h1.highlight= title
-      p Login using one of these services.
+      p Login with Twitter.
       ul.social-list 
         li 
-          a(href='/auth/twitter')
-            i.fa.fa-twitter-square.fa-3x
-        li
-          a(href='/auth/github')
-            i.fa.fa-github-square.fa-3x
-        li
-          a(href='/auth/linkedin')
-            i.fa.fa-linkedin-square.fa-3x
-         li
-          a(href='/auth/linkedin')
-            i.fa.fa-google-plus-square.fa-3x
+          a(href='/users/auth/twitter')
+            i.fa.fa-twitter-square.fa-4x
       .clearfix
       p Or use form below if you signed up directly through the site.
       form.form-signin(method="post" action="/users/login")
@@ -30,6 +21,6 @@ block content
         .form-group
           button.btn.btn-default Login
       p
-        | Would you like to create polls as well as vote in them? You must register for an account, which is fast, free and simple (and EasyPoll never shares or sells user data). Go 
-        a(href='/register')  here
-        |  to register.
+        | You need an account if you want to both vote in and create polls. If you don't want to use Twitter, go   
+        a(href='/users/register') here
+        | to register.

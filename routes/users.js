@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
-var passportLinkedIn = require('../auth/linkedin');
-var passportGitHub = require('../auth/github');
+var passportLocal = require('../auth/local');
 var passportTwitter = require('../auth/twitter');
 var User = require('../models/user');
 
@@ -24,50 +23,14 @@ router.get('/register', function(req, res, next) {
   });
 });
 
-// register through LinkedIn
-router.get('/auth/linkedin', passportLinkedIn.authenticate('linkedin'));
-
-router.get('/auth/linkedin/callback',
-  passportLinkedIn.authenticate('linkedin', {
-    failureRedirect: '/login'
-  }), function(req, res) {
-    res.json(req.user);
-  });
-
-// register through GitHub
-router.get('/auth/github', passportGitHub.authenticate('github',
-  { scope: '[user:email]' }));
-
-router.get('/auth/github/callback',
-  passportGitHub.authenticate('github', {
-    successRedirect: '/polls',
-    failureRedirect: '/login'
-  }), function(req, res) {
-    res.json(req.user);
-  });
-  
 // register through Twitter
 router.get('/auth/twitter', passportTwitter.authenticate('twitter'));
 
 router.get('/auth/twitter/callback',
-  passportTwitter.authenticate('twitter', {
-    successRedirect: '/twitter',
+  passport.authenticate('twitter', {
+    successRedirect: '/polls',
     failureRedirect: '/login'
-  }), function(req, res) {
-    res.json(req.user);
-  });
-  
-// register through Google Plus
-router.get('/auth/googleplus', passportTwitter.authenticate('googleplus'));
-
-router.get('/auth/goggleplus/callback',
-  passportTwitter.authenticate('googleplus', {
-    successRedirect: '/google',
-    failureRedirect: '/login'
-  }), function(req, res) {
-    res.json(req.user);
-  });
-  
+  }));
   
 // log user out
 router.get('/logout', function(req, res) {
@@ -77,10 +40,10 @@ router.get('/logout', function(req, res) {
 });
 
 // ======= POST routes ========
-// log user in with local strategy and form validation
-router.post('/login', passport.authenticate('local', {
+// log user in with local strategy 
+router.post('/login', passportLocal.authenticate('local-login', {
   successRedirect: '/polls',
-  failureRedirect: '/login',
+  failureRedirect: '/users/login',
   failureFlash: true 
 }), function(req, res, next) {
   req.session.save(function(error) {
@@ -90,25 +53,12 @@ router.post('/login', passport.authenticate('local', {
   });
 });
 
-// create user account
-router.post('/register', function(req, res) {
-  var newUser = new User({ username: req.body.username });
-  var password = req.body.password;
-  var name = req.body.name;
-
-  User.register(newUser, password, function(error, user) {
-    if (error) {
-      console.log(error);
-      return res.render('users/register', {
-        error: error.message
-      });
-    }
-
-    passport.authenticate('local')(req, res, function() {
-      req.flash('success', 'Welcome to EasyPoll! Your account is created, and you now can add your own polls, as well as vote on existing ones.');
-      res.redirect('/users/login');
-    });
-  });
-}); 
+// registration form processing with passport
+// authentication and redirect
+router.post('/register', passportLocal.authenticate('local-register', {
+	successRedirect: '/polls',
+	failureRedirect: '/register',
+	failureFlash: true
+}));
 
 module.exports = router;

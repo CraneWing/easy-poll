@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 
 var pollSchema = mongoose.Schema({
-  poll_title: {
-    type: String
-  },
-  question: {
-    type: String
-  },
+  poll_title: String,
+  question: String,
   author: {
-    type: String
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    username: String
   },
   total_votes: {
     type: Number,

@@ -20,8 +20,8 @@
       if (currentUser)
         li.dropdown
           a.dropdown-toggle(href='#', data-toggle='dropdown')
-            span= currentUser.username
-            i.fa.fa-user &nbsp;
+            span #{currentUser.local.displayName || currentUser.twitter.displayName}
+            i.fa.fa-user 
             i.fa.fa-chevron-down
           ul.dropdown-menu
             li

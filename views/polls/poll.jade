@@ -4,7 +4,6 @@ block content
   .row
     .col-md-12
       h1.highlight #{poll.poll_title}
-      hr
   .row
     .col-md-6
       h4 #{poll.question}
@@ -18,7 +17,7 @@ block content
             button.btn.btn-default Add Vote
       .clearfix
       p Added by 
-        strong #{poll.author} 
+        strong #{poll.author.username} 
         | on 
         strong #{moment(poll.created_at).format('D MMMM YYYY, h:mm a')}
       if (currentUser)
@@ -27,12 +26,13 @@ block content
           &nbsp; 
           a.btn.btn-danger(href="/polls/" + poll._id + "/delete") Delete
     .col-md-6
-      h4 Current Results
-      p 
-        strong Total Votes: 
-        | #{poll.total_votes}
-      ul 
-        each choice, i in choices
-          li
-            strong #{choice.choice_name}: 
-            | #{choice.choice_count}
+      h4 Current Results 
+        span.votes (Total Votes: #{poll.total_votes})
+      .pie-chart
+        script.
+          if (#{poll.total_votes} == 0) {
+          $('.pie-chart').append('<p>No results for this poll yet. Why not cast a vote?</p>');
+          }
+          else {
+          makePieChart([#{choices}]);
+          }
