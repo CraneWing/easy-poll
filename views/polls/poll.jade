@@ -25,9 +25,17 @@ block content
           a.btn.btn-success(href="/polls/" + poll._id + "/edit") Edit
           &nbsp; 
           a.btn.btn-danger(href="/polls/" + poll._id + "/delete") Delete
+      p.tweet
+        a.btn.btn-info.btn-lg(href='http://twitter.com/intent/tweet?url=https://easy-poll-cranewing.c9users.io/polls/' + poll._id + '&text=' + poll.poll_title)
+          i.fa.fa-twitter.fa-2x
+          | Tweet This Poll!
     .col-md-6
       h4 Current Results 
-        span.votes (Total Votes: #{poll.total_votes})
+        span.votes 
+          if poll.total_votes == 0
+            |(No Results Yet)
+          else
+            |(Total Votes: #{poll.total_votes})
       .pie-chart
         script.
           if (#{poll.total_votes} == 0) {

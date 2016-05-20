@@ -5,10 +5,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var validator = require('express-validator');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var mongoose = require('mongoose');
-// user model
-var User = require('./models/user');
 
 // for passport
 var passport = require('passport');
@@ -34,11 +33,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// express-session - for passport and flash messages
+// express-session - for passport and flash messages.
+// connect-mongo used to persist authenication,
+// even when pages refreshed.
 app.use(session({
-  secret: 'double secret',
-  resave: true,
-  saveUninitialized: true
+  secret: process.env.SESSION_SECRET || 'double secret',
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection
+  })
 }));
 
 // tell app to use Passport 

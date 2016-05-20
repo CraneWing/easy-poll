@@ -134,3 +134,14 @@ path {
   stroke: #fff;
   stroke-width: 2px;
 }
+
+.tweet {
+  margin-left: 3%;
+  padding-top: 15px;
+}
+
+.tweet a span {
+ font-size: 18px;
+ margin-left: 2px;
+ vertical-align: middle;
+}

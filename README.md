@@ -1,6 +1,6 @@
 # EasyPoll
 
-EasyPoll is the first of Free Code Camp's full-stack challenges and uses Node as its backbone. These are the "user stories" this app must fulfill:
+EasyPoll is the first of Free Code Camp's full-stack challenges, which is to build a voting app.These are the "user stories" this app must fulfill:
 
 * As an authenticated user, I can keep my polls and come back later to access them.
 * As an authenticated user, I can share my polls with my friends.
@@ -11,4 +11,4 @@ EasyPoll is the first of Free Code Camp's full-stack challenges and uses Node as
 * As an unauthenticated or authenticated user, I can see the results of polls in chart form.
 * As an authenticated user, if I don't like the options on a poll, I can create a new option.
 
-The app is built with Express framework and MongoDB as its database. Passport provides user verification and authentication.
+App is Node based, with Express framework with MongoDB for the database. Passport provides user verification and authentication. Poll result pie charts rendered with d3.js.
