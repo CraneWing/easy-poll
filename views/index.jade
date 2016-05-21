@@ -3,9 +3,21 @@ extends layout
 block content
   .row
     .col-md-9.col-md-offset-2
-      h1.highlight EasyPoll 
-        span
-          i.fa.fa-pencil
-      p Where you can participate in a variety of polls and even create some of your own!
-      
-      p Unregistered users may browse polls and cast votes. By registering you can not only partcipate in polls, but can create, edit and delete your own.
+      .jumbotron
+        h1.text-center EasyPoll
+          span
+            i.fa.fa-pencil
+        p.lead Welcome to the site where you can explore the world of real-time polls! At EasyPoll it is easy to:
+        ul
+          li View polls, vote and see results in real time as registered or unregistered user
+          li Registered users may create and manage their own polls
+          li Registered users may view, edit or delete their polls
+          li Registered users also may add custom answers to polls they created, either in the user Dashboard or in the general polls list
+        p.text-center
+          a.btn.btn-success.btn-lg(href='/polls')
+            i.fa.fa-pie-chart 
+            span See Polls!
+          a.btn.btn-primary.btn-lg(href='/users/register')
+            i.fa.fa-thumbs-up
+            span Get Account
+        

@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title EasyPoll | #{title}
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
+    link(rel='stylesheet', href='/stylesheets/custom-shared.css')
+    link(rel='stylesheet', href='/stylesheets/custom-manage.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    script(src='https://platform.twitter.com/widgets.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.0.0/d3.min.js')
+    script(src='/js/vendor/d3.legend.js')
+    script(src='/js/pie-chart.js')
+    script(src="/js/extra-fields.js")
+  body
+    include ./includes/manage/navbar.jade
+    .container
+      include ./includes/shared/messages.jade
+      block content

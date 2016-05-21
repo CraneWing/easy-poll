@@ -29,7 +29,7 @@ middlewareObj.checkPollOwnership = function(req, res, next) {
   }
   else {
     req.flash('error', 'You must login to perform this action');
-    res.redirect('back');
+    res.redirect('/users/login');
   }
 };
 

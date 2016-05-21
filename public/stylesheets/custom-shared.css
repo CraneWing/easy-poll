@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,300,300italic,400italic,500,500italic,700,700italic');
+
+/* Google font for entire site */
+body {
+ font-family: 'Fira Sans';
+}
+
+/* navbar */
+.dropdown .dropdown-toggle i {
+  margin-left: 3px;
+}
+
+.navbar-brand span {
+  margin-left: 3px;
+}
+
+/* poll pie chart area styles */
+.votes {
+  color: #ff3333;
+}
+
+.legend .legend-box {
+  fill: #fff;
+  stroke: #333;
+  stroke-width: 0.6px;
+}
+
+.arc text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+path {
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+.tweet {
+  margin-left: 3%;
+  padding-top: 15px;
+}
+
+.tweet a {
+ font-size: 18px;
+ margin-left: 2px;
+ vertical-align: middle;
+}
+
+.arc text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* add field in new poll and voting forms */
+.add-field:hover {
+  color: #ff3333;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* shared form styles */
+.submit-btns .btn {
+  margin-left: 3px;
+}

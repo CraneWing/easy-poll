@@ -1,0 +1,23 @@
+extends ../../views/layout_manage
+
+block content
+  .row
+    .col-md-9.col-md-offset-2
+      h1= title
+      ul.errors
+          if errors
+            each error, i in errors
+              li.alert.alert-danger #{error.msg}
+      form(method="post" action="/manage/add")
+        .form-group
+          label Title
+          input.form-control(type="text" name="poll_title")
+        .form-group
+          label Poll Question
+          input.form-control(type="text" name="question")
+        .form-group
+          label Poll Responses (separate each item with semicolon(;))
+          textarea.form-control(name="choices", rows="6")
+        input(type="hidden" value="currentUser.username")
+        .form-group
+          button.btn.btn-primary Add Poll

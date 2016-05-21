@@ -1,0 +1,138 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 40px;
+}
+
+.navbar-brand {
+  color: #fff;
+}
+
+.navbar-brand:hover {
+  color: #333;
+}
+
+.dropdown .dropdown-toggle i {
+  margin-left: 3px;
+}
+
+/* homepage jumbotron */
+.jumbotron {
+  background-color: #fff;
+  color: #000;
+}
+
+.jumbotron .btn {
+  margin-left: 5px;
+}
+
+.jumbotron h1 {
+  color: #ff3333;
+}
+
+.jumbotron .lead {
+  font-weight: 700;
+}
+
+.jumbotron li {
+  font-size: 18px;
+}
+
+.jumbotron .btn {
+  margin-left: 5px;
+}
+
+.jumbotron span {
+  margin-left: 3px;
+}
+
+/* page footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color:#ff3333;
+  color: #fff;
+  /* Set the fixed height of the footer here */
+  height: 45px;
+}
+
+.footer p {
+  padding-top: 12px;
+}
+
+.footer p a {
+  color: #fff;
+}
+
+.footer p a:hover {
+  color: #333;
+}
+
+.footer span i {
+  font-size: 22px;
+}
+
+.list-group-item.poll:hover {
+  background-color: #ccc;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.errors ul {
+  list-style: none;
+}
+
+
+/* login and register form styles */
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 14px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-intro {
+  padding-top: 15px;
+}
+
+/* social net register list */
+.social-list {
+  float: left;
+  list-style: none;
+}
+
+.social-list li {
+  display: inline-block;
+  color: #ff3333;
+  padding: 0 15px;
+}
+
+.social-list li a:hover {
+  color: #333;
+}

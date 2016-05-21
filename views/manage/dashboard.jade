@@ -1,0 +1,26 @@
+extends ../../views/layout_manage
+
+block content
+  .row
+    .col-md-9.col-md-offset-2
+        h1= title
+        p.lead Welcome, #{currentUser.local.displayName || currentUser.twitter.displayName}! Listed below are the polls you have created for this site.
+        if (polls.length == 0)
+          p You have no polls yet. Why not add one now?
+        else
+          p.pull-right
+            a.btn.btn-primary(a href="/manage/add") Add New Poll
+          table.table.table-striped.poll-list
+            thead
+              tr
+                th Title 
+                th Actions
+            tbody
+              each poll, i in polls
+                tr
+                  td #{poll.poll_title}
+                  td 
+                    a.btn.btn-info(href="/manage/poll/#{poll._id}") View
+                    a.btn.btn-success(href="/manage/poll/#{poll._id}/edit") Edit
+                    a.btn.btn-danger(href="/manage/poll/#{poll._id}/delete") Delete
+                  

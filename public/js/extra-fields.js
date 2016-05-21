@@ -3,7 +3,7 @@
 // more choices to a poll.
 $(document).ready(function() {
 	var n = 0;
-	$('#add-field').on('click', function() {
+	$('.add-field').on('click', function() {
 		n++;
 		$('.new-fields').append(
 			'<div class="form-group">' + 

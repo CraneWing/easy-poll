@@ -11,6 +11,7 @@ block content
         form(action='/polls/' + poll._id + '/addvote' method="post")
           .form-group
             select.form-control(name="choice")
+              option(value='0') Make a choice
               each choice, i in choices
                 option(value="#{choice._id}") #{choice.choice_name}
           .form-group

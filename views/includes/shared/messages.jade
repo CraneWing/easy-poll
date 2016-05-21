@@ -1,0 +1,8 @@
+if (success && success.length > 0)
+  .alert.alert-success.alert-dismissable
+    button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+    p= success
+if (error && error.length > 0)
+  .alert.alert-danger.alert-dismissable
+    button.close(type="button", data-dismiss="alert", aria-hidden="true") &times;
+    p= error

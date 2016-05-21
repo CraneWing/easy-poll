@@ -16,6 +16,7 @@ var passport = require('passport');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var polls = require('./routes/polls');
+var manage = require('./routes/manage');
 
 var app = express();
 
@@ -80,6 +81,7 @@ app.use(validator({
 app.use('/', routes);
 app.use('/polls', polls);
 app.use('/users', users);
+app.use('/manage', manage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

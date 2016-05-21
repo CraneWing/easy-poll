@@ -1,0 +1,46 @@
+extends ../../views/layout_manage
+
+block content
+  .row
+    .col-md-12
+      h1.highlight #{poll.poll_title}
+  .row.well
+    .col-md-6
+      h4 #{poll.question}
+      .col-sm-8
+        form(action="/manage/poll/#{poll._id}/addvote" method="post")
+          .form-group
+            select.form-control(name="choice")
+              option(value='0') Make a choice
+              each choice, i in choices
+                option(value="#{choice._id}") #{choice.choice_name}
+          .form-group
+            button.btn.btn-default Add Vote
+      .clearfix
+      p Added by 
+        strong #{poll.author.username} 
+        | on 
+        strong #{moment(poll.created_at).format('D MMMM YYYY, h:mm a')}
+      p 
+        a.btn.btn-lg.btn-success(href="/manage/polls/#{poll._id}/edit") Edit
+        &nbsp; 
+        a.btn.btn-lg.btn-danger(href="/manage/polls/#{poll._id}/delete") Delete
+      p.tweet
+        a.btn.btn-info.btn-lg(href="http://twitter.com/intent/tweet?url=https://easy-poll-cranewing.c9users.io/polls/#{poll._id}&text=' + poll.poll_title")
+          i.fa.fa-twitter.fa-2x
+          | Tweet This Poll!
+    .col-md-6
+      h4 Current Results 
+        span.votes 
+          if poll.total_votes == 0
+            |(No Results Yet)
+          else
+            |(Total Votes: #{poll.total_votes})
+      .pie-chart
+        script.
+          if (#{poll.total_votes} == 0) {
+          $('.pie-chart').append('<p>Currently no votes for this poll. Why not cast one?</p>');
+          }
+          else {
+          makePieChart([#{choices}]);
+          }

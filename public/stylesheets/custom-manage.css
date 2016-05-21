@@ -1,0 +1,9 @@
+/* user dashboard page */
+.poll-list .btn {
+  margin-left: 4px;
+}
+
+.logged-in {
+  margin-top: 15px;
+  margin-left: -10px;
+}
