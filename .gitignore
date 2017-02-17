@@ -3,4 +3,3 @@
 node_modules/
 npm-debug.log
 mongod
-auth/auth-config.js

@@ -67,7 +67,7 @@ var init = require('./init');
 					);
 				}
 				// if user in DB and has valid password, return user
-				return done(null, user, req.flash('success', 'Welcome! You are now logged in'));
+				return done(null, user, req.flash('success', 'Welcome! You are now logged in. Now you can not only vote in polls but create, edit and delete them too!'));
 			});
 	}));
 	
