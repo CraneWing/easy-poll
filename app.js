@@ -21,7 +21,7 @@ var manage = require('./routes/manage');
 var app = express();
 
 // DB connection
-mongoose.connect('mongodb://cranewing-easy-poll-3190738:27017/easypoll');
+mongoose.connect('mongodb://test-user:123456@ds153669.mlab.com:53669/heroku_347qh15j');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
